@@ -10,20 +10,21 @@
 </head>
 
 <body>
+    <!-- Navbar -->
     <nav class="navbar navbar-expand-xl navbar-dark bg-dark">
         <div class="container-fluid">
-            <a class="navbar-brand" href="PaginaPrincipal.html">Inicio</a>
+            <a class="navbar-brand" onclick="showSection('home')">Inicio</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarDark"
                 aria-controls="navbarDark" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse show" id="navbarDark">
+            <div class="collapse navbar-collapse" id="navbarDark">
                 <ul class="navbar-nav me-auto mb-2 mb-xl-0">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="Proyectos.html">Proyectos</a>
+                        <a class="nav-link active" onclick="showSection('proyectos')">Proyectos</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="Formulario.html">Formulario</a>
+                        <a class="nav-link" onclick="showSection('formulario')">Formulario</a>
                     </li>
                 </ul>
                 <form class="d-flex">
@@ -34,33 +35,84 @@
         </div>
     </nav>
 
-    <div class="container mt-5">
-        <h1 class="text-center">Introducción</h1>
+    <!-- Home -->
+    <div id="home" class="container mt-5 section">
+        <h1 class="text-center text-primary mb-4">Todo sobre Erik Prin</h1>
 
-        <div class="section">
-            <h2>Estudios Realizados</h2>
-            <p>He completado mis estudios en el área de Sistemas de Información, incluyendo cursos sobre desarrollo web y programación. Actualmente, estoy en 2º de ASIR.</p>
+        <!-- Estudios -->
+        <div class="card mb-4 shadow-sm">
+            <div class="card-body">
+                <h2 class="card-title text-primary">Estudios Realizados</h2>
+                <p class="card-text">He completado mis estudios en el área de Administración de Redes, incluyendo cursos
+                    sobre desarrollo web, programación, administración de bases de datos. Actualmente, estoy en 2º de
+                    ASIR y dentro de poco iniciaré mis prácticas en empresa. Después no sé si seguiré mis estudios
+                    realizando el grado de DAM o especializándome en ciberseguridad, o tal vez me quede en la empresa
+                    trabajando.</p>
+            </div>
         </div>
 
-        <div class="section">
-            <h2>Intereses Personales</h2>
-            <p>Me interesa la tecnología, la música y el desarrollo personal. Siempre estoy buscando aprender cosas nuevas y mejorar mis habilidades.</p>
+        <!-- Intereses Personales -->
+        <div class="card mb-4 shadow-sm">
+            <div class="card-body">
+                <h2 class="card-title text-primary">Intereses Personales</h2>
+                <p class="card-text">Me interesa la tecnología, tanto la relacionada con el desarrollo como la de
+                    entretenimiento como los videojuegos. También me interesa el desarrollo personal, tanto físico como
+                    mental, siempre estoy buscando aprender cosas nuevas y mejorar mis habilidades. Además, estoy
+                    interesado en realizar un curso sobre ventas online. Me gustaría tener mi propia tienda online y
+                    vender una gran variedad de productos. Si me va bien, podría ser un gran apoyo económico extra además
+                    del sueldo de mi trabajo, o incluso vivir solo de ello, lo que me permitiría más libertad en cuanto a
+                    tiempo.</p>
+            </div>
         </div>
 
-        <div class="section">
-            <h2>Hobbies</h2>
-            <p>En mi tiempo libre disfruto programar, jugar videojuegos, y hacer ejercicio. También me gusta salir a caminar y explorar nuevos lugares.</p>
+        <!-- Hobbies -->
+        <div class="card mb-4 shadow-sm">
+            <div class="card-body">
+                <h2 class="card-title text-primary">Hobbies</h2>
+                <p class="card-text">En mi tiempo libre disfruto programar, jugar videojuegos, y hacer ejercicio.
+                    También me gusta salir a caminar y explorar nuevos lugares.</p>
+            </div>
         </div>
     </div>
 
-    <footer class="bg-dark text-white text-center py-2">
+    <!-- Proyectos -->
+    <div id="proyectos" class="container mt-5 section" style="display: none;">
+        <h1 class="text-center text-primary mb-4">Proyectos</h1>
+
+        <div class="row" id="project-cards">
+            <!-- Cartas de proyectos generadas por JavaScript -->
+        </div>
+    </div>
+
+    <!-- Formulario -->
+    <div id="formulario" class="container mt-5 section" style="display: none;">
+        <h1 class="text-center text-primary mb-4">Formulario</h1>
+        <form>
+            <div class="mb-3">
+                <label for="nombre" class="form-label">Nombre</label>
+                <input type="text" class="form-control" id="nombre" placeholder="Ingresa tu nombre">
+            </div>
+            <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" class="form-control" id="email" placeholder="Ingresa tu email">
+            </div>
+            <div class="mb-3">
+                <label for="mensaje" class="form-label">Mensaje</label>
+                <textarea class="form-control" id="mensaje" rows="3" placeholder="Escribe tu mensaje"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Enviar</button>
+        </form>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white text-center py-3 mt-5">
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-md-8">
                     <p class="mb-0">Erik Prin 2º ASIR</p>
                 </div>
                 <div class="col-md-4">
-                    <img src="./Imagenes/Logo Cuatrovientos.png" alt="Logo" class="img-fluid" style="max-width: 80px;">
+                    <img src="./Imagenes/Logo Cuatrovientos.png" alt="Logo" class="img-fluid" width="80">
                 </div>
             </div>
         </div>
@@ -69,8 +121,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
-    <script src="./jquery-3.7.1.min.js"></script>
-    <script src="./PaginaPrincipal.js"></script>
+        <script src="./PaginaPrincipal.js"></script>
 </body>
 
 </html>
