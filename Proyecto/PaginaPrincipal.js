@@ -1,54 +1,94 @@
-function showSection(sectionId) {
-    // Ocultar todas las secciones
-    document.querySelectorAll('.section').forEach(section => section.style.display = 'none');
-    // Mostrar la sección seleccionada
-    document.getElementById(sectionId).style.display = 'block';
-}
-function showSection(sectionId) {
-    document.querySelectorAll('.section').forEach(section => {
-        section.style.display = 'none';
-    });
-    document.getElementById(sectionId).style.display = 'block';
+// Función para mostrar la sección correspondiente
+function showSection(section) {
+    $('.section').hide(); // Ocultar todas las secciones
+    $('#' + section).show(); // Mostrar la sección seleccionada
 }
 
 // Datos de ejemplo para proyectos
 const projects = [
-    { image: 'https://via.placeholder.com/300x200', description: 'Proyecto 1: Desarrollo Web' },
-    { image: 'https://via.placeholder.com/300x200', description: 'Proyecto 2: Aplicación móvil' },
-    { image: 'https://via.placeholder.com/300x200', description: 'Proyecto 3: E-commerce' }
+    { 
+        image: './Imagenes/i3.jpeg', 
+        description: `
+            <h5>Proyecto 1: Desarrollo I3</h5>
+            <p>Este proyecto para empezar fue en colaboración con Salesianos Pamplona.</p>
+            <p>El proyecto consistía en idear unos dispositivos que ayudasen en el día a día a personas con necesidades especiales. Nosotros creamos las ideas
+            y se las mostramos a Salesianos. Ellos desarrollaron la parte electrónica necesaria y nosotros la parte de software.</p>
+        ` 
+    },
+    { 
+        image: './Imagenes/Pagina Web.jpg', 
+        description: `
+            <h5>Proyecto 2: Desarrollo Página Web</h5>
+            <p>Este proyecto fue más sencillo. Consistía en desarrollar nuestras propias páginas web para cualquier cosa. Podía ser para vender productos
+            o para mostrar algún tipo de información sobre algo.</p>
+        ` 
+    },
+    { 
+        image: './Imagenes/base de datos.jpg', 
+        description: `
+            <h5>Proyecto 3: Desarrollo y administración de base de datos</h5>
+            <p>En este proyecto nuestro objetivo era desarrollar una base de datos para una empresa, y administrarla. 
+            Para ello nos tuvimos que inventar una empresa, de fabricación o ventas de algún producto, y crear cuál sería su base de datos.
+            Después añadir algunos datos sobre productos y administrarla.</p>
+        ` 
+    }
 ];
 
-// Generar cartas de proyectos
-const projectCardsContainer = document.getElementById('project-cards');
+// Inicializar en la sección de inicio
+$(document).ready(function() {
+    showSection('home');
 
-projects.forEach((project, index) => {
-    // Crear div de la carta
-    const cardDiv = document.createElement('div');
-    cardDiv.classList.add('col-md-4', 'mb-4');
-
-    // Crear contenido HTML de la carta
-    cardDiv.innerHTML = `
-        <div class="card" id="card-${index}" onclick="flipCard(${index})">
-            <img src="${project.image}" class="card-img-top" alt="Project image" id="image-${index}">
-            <div class="card-body" style="display: none;" id="text-${index}">
-                <p class="card-text">${project.description}</p>
+    // Generar dinámicamente las cartas de proyectos
+    const projectCards = $('#project-cards');
+    projects.forEach((project, index) => {
+        projectCards.append(`
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <img src="${project.image}" class="card-img-top" alt="Proyecto ${index + 1}" data-index="${index}" style="cursor:pointer;">
+                    <div class="card-body">
+                        <h5 class="card-title">Proyecto ${index + 1}</h5>
+                    </div>
+                </div>
             </div>
-        </div>
-    `;
-    // Agregar carta al contenedor
-    projectCardsContainer.appendChild(cardDiv);
+        `);
+    });
+
+    // Manejar el clic en una imagen de proyecto para abrir el modal
+    $('.card-img-top').on('click', function() {
+        const projectIndex = $(this).data('index');
+        const project = projects[projectIndex];
+
+        $('#modalImage').attr('src', project.image); // Cargar la imagen del proyecto
+        $('#modalDescription').html(project.description); // Cargar la descripción del proyecto
+        $('#projectModal').modal('show'); // Mostrar el modal
+    });
+
+    // Manejo del envío del formulario
+    $('#formulario').on('submit', function(event) {
+        event.preventDefault(); // Prevenir el envío por defecto del formulario
+        const email = $('#email').val();
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Expresión regular para validar el correo
+
+        if (emailRegex.test(email)) {
+            // Si el correo es válido, mostrar el modal de confirmación
+            $('#confirmationModal').modal('show');
+            // Limpiar el formulario
+            $(this).trigger('reset');
+        } else {
+            // Mostrar alerta si el correo es inválido
+            alert('Por favor, ingresa un correo electrónico válido. Asegúrate de que tenga el formato correcto.');
+        }
+    });
 });
 
-// Función para girar la carta
-function flipCard(index) {
-    const image = document.getElementById(`image-${index}`);
-    const text = document.getElementById(`text-${index}`);
-
-    if (image.style.display === 'none') {
-        image.style.display = 'block';
-        text.style.display = 'none';
-    } else {
-        image.style.display = 'none';
-        text.style.display = 'block';
-    }
-}
+$('#projectSearch').on('input', function() {
+    const searchTerm = $(this).val().toLowerCase();
+    $('.project-card').each(function() {
+        const cardDescription = $(this).find('.card-img-top').attr('alt').toLowerCase(); // Obtener el texto de la descripción del proyecto
+        if (cardDescription.includes(searchTerm)) {
+            $(this).show(); // Mostrar si incluye el término de búsqueda
+        } else {
+            $(this).hide(); // Ocultar si no incluye el término de búsqueda
+        }
+    });
+});
