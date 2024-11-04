@@ -13,7 +13,7 @@
     <!-- Navbar -->
     <nav class="navbar navbar-expand-xl navbar-dark bg-dark">
         <div class="container-fluid">
-            <a class="navbar-brand" onclick="showSection('home')">Inicio</a>
+            <a class="navbar-brand" href="#" onclick="showSection('home')">Inicio</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarDark"
                 aria-controls="navbarDark" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -21,16 +21,16 @@
             <div class="collapse navbar-collapse" id="navbarDark">
                 <ul class="navbar-nav me-auto mb-2 mb-xl-0">
                     <li class="nav-item">
-                        <a class="nav-link" onclick="showSection('proyectos')">Proyectos</a>
+                        <a class="nav-link" href="#" onclick="showSection('proyectos')">Proyectos</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" onclick="showSection('formulario')">Formulario</a>
+                        <a class="nav-link" href="#" onclick="showSection('formulario')">Formulario</a>
                     </li>
                 </ul>
                 <form class="d-flex">
                     <input id="search" class="form-control me-2" type="search" placeholder="Buscar proyectos"
                         aria-label="Search">
-                    <button class="btn btn-outline-light" type="button">Buscar</button>
+                    <button class="btn btn-outline-light" type="button" id="searchButton">Buscar</button>
                 </form>
             </div>
         </div>
@@ -39,8 +39,6 @@
     <!-- Home -->
     <div id="home" class="container mt-5 section">
         <h1 class="text-center text-primary mb-4">Todo sobre Erik Prin</h1>
-
-        <!-- Estudios -->
         <div class="card mb-4 shadow-sm">
             <div class="card-body">
                 <h2 class="card-title text-primary">Estudios Realizados</h2>
@@ -49,8 +47,6 @@
                     ASIR y dentro de poco iniciaré mis prácticas en empresa.</p>
             </div>
         </div>
-
-        <!-- Intereses Personales -->
         <div class="card mb-4 shadow-sm">
             <div class="card-body">
                 <h2 class="card-title text-primary">Intereses Personales</h2>
@@ -59,8 +55,6 @@
                     mental.</p>
             </div>
         </div>
-
-        <!-- Hobbies -->
         <div class="card mb-4 shadow-sm">
             <div class="card-body">
                 <h2 class="card-title text-primary">Hobbies</h2>
@@ -78,7 +72,6 @@
     <!-- Proyectos -->
     <div id="proyectos" class="container mt-5 section" style="display: none;">
         <h1 class="text-center text-primary mb-4">Proyectos</h1>
-
         <div class="row" id="project-cards">
             <!-- Cartas de proyectos generadas por JavaScript -->
         </div>
@@ -94,7 +87,7 @@
                 </div>
                 <div class="modal-body">
                     <img id="modalImage" src="" alt="Imagen del proyecto" class="img-fluid mb-3">
-                    <div id="modalDescription"></div> <!-- Aquí se cargará la descripción del proyecto -->
+                    <div id="modalDescription"></div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
